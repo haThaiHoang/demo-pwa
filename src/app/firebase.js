@@ -7,6 +7,7 @@ import Storage from '@/utils/storage'
 let messaging = null
 
 if (!firebase.apps.length) {
+  console.log('initialing firebase...')
   firebase.initializeApp({
     apiKey: 'AIzaSyCu290sCD5ZFLPWeMvqMY8w_lOpLYSU8b8',
     authDomain: 'fir-pwa-cd62b.firebaseapp.com',
@@ -17,6 +18,7 @@ if (!firebase.apps.length) {
   })
 
   if (firebase.messaging.isSupported()) {
+    console.log('config messaging...')
     messaging = firebase.messaging()
     messaging
       .usePublicVapidKey('BI6Fsye8MFsWao9fRTI88mJaG4i9RjOtgrmNG6JGn95_fcp8aqa8psNtpIfRzcnWJ6T51B7dyoqoYMp_vyilVjA')
@@ -34,6 +36,7 @@ const createNotificationListeners = async () => {
       Storage.set('FCM_TOKEN', newFcmToken)
     }
 
+    console.log('ready onmessage')
     messaging.onMessage(() => {
       alert('NEW message')
     })
