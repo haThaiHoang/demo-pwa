@@ -1,0 +1,43 @@
+image: node:10
+stages:
+  - build
+  - deploy
+
+before_script:
+  - apt update -y
+  - apt install -y ssh rsync
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - touch ~/.ssh/id_rsa && echo -e "$CI_SSH_KEY" > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+
+build:
+  stage: build
+  script:
+    - yarn install
+    - sed -i 's~DEV_API_URL~$DEV_CI_API_URL~g' $DEV_CI_JS
+    - sed -i 's~DEV_PUBLIC_PATH~$DEV_CI_PUBLIC_PATH~g' $DEV_CI_JS
+    - sed -i 's~DEV_BASE_NAME~$DEV_CI_BASE_NAME~g' $DEV_CI_JS
+    - yarn start
+    - yarn build:development
+  artifacts:
+    paths:
+      - ./build
+      - ./src/configs
+      - ./node_modules
+    expire_in: 1 hrs
+
+  only:
+    - develop
+  tags:
+    - K8S
+
+deploy:
+  stage: deploy
+  script:
+    - rsync -hrz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $CI_PROJECT_DIR/ $DEV_CI_SRV_HOST
+  only:
+    - develop
+  tags:
+    - K8S
