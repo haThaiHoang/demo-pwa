@@ -35,9 +35,9 @@ module.exports = (env) => {
   if (!IS_DEV) {
     plugins = plugins.concat([
       new WebpackPwaManifest({
-        name: 'Sheer',
-        short_name: 'Sheer',
-        description: 'Sheer',
+        name: 'Demo PWA',
+        short_name: 'Demo PWA',
+        description: 'Demo PWA',
         background_color: '#069',
         theme_color: '#069',
         orientation: 'portrait',
