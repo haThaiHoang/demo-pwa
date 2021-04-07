@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './firebase'
 
 const App = () => (
   <div>
-    Hello Worlddd345234
+    Hello World
   </div>
 )
 

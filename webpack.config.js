@@ -6,6 +6,7 @@ const lodash = require('lodash')
 const path = require('path')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 function getAppConfig(env) {
   return {}
@@ -29,6 +30,10 @@ module.exports = (env) => {
     new webpack.DefinePlugin({
       'window._CONFIG': JSON.stringify(getAppConfig(NODE_ENV))
     }),
+    new CopyPlugin([{
+      from: path.join(__dirname, 'public'),
+      to: path.join(__dirname, 'build')
+    }]),
     new webpack.HotModuleReplacementPlugin()
   ]
 
