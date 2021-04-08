@@ -29,7 +29,7 @@ function subscribeTokenToTopic(token, topic) {
   fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/${topic}`, {
     method: 'POST',
     headers: new Headers({
-      'Authorization': 'key=AIzaSyCu290sCD5ZFLPWeMvqMY8w_lOpLYSU8b8'
+      'Authorization': 'key=BI6Fsye8MFsWao9fRTI88mJaG4i9RjOtgrmNG6JGn95_fcp8aqa8psNtpIfRzcnWJ6T51B7dyoqoYMp_vyilVjA'
     })
   }).then((response) => {
     if (response.status < 200 || response.status >= 400) {
