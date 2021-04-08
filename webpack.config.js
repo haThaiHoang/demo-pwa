@@ -40,11 +40,11 @@ module.exports = (env) => {
   if (!IS_DEV) {
     plugins = plugins.concat([
       new WebpackPwaManifest({
-        name: 'Demo PWA',
-        short_name: 'Demo PWA',
-        description: 'Demo PWA',
-        background_color: '#069',
-        theme_color: '#069',
+        name: 'BAP Demo PWA',
+        short_name: 'BAP Demo PWA',
+        description: 'BAP Demo PWA',
+        background_color: '#60a460',
+        theme_color: '#60a460',
         orientation: 'portrait',
         icons: [{
           src: path.resolve('src/resources/images/favicon.png'),
