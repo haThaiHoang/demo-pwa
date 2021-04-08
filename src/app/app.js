@@ -47,11 +47,12 @@ const StyledDiv = styled.div`
         margin-bottom: 0;
       }
       
-      img {
+      .img {
         width: 50px;
         height: 50px;
         border-radius: 25px;
         margin-right: 20px;
+        background-color: gray;
       }
       
       .info-box {
@@ -80,7 +81,7 @@ const App = () => (
     <div className="list">
       {ITEMS.map((item, index) => (
         <div key={index} className="item">
-          <img src="https://picsum.photos/300" alt="" />
+          <div className="img" />
           <div className="info-box">
             <p className="name">Name</p>
             <p className="description">Description</p>
