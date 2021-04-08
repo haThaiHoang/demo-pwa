@@ -22,8 +22,6 @@ if (!firebase.apps.length) {
     messaging = firebase.messaging()
     messaging
       .usePublicVapidKey('BI6Fsye8MFsWao9fRTI88mJaG4i9RjOtgrmNG6JGn95_fcp8aqa8psNtpIfRzcnWJ6T51B7dyoqoYMp_vyilVjA')
-    console.log('KAKAKAKAKAK', messaging)
-    console.log('KAKAKAKAKAK', messaging.subscribeToTopic)
   }
 }
 
