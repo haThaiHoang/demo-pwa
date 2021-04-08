@@ -26,11 +26,8 @@ if (!firebase.apps.length) {
 }
 
 function subscribeTokenToTopic(token) {
-  fetch('https://76241b3afc1b.ngrok.io/subscribe', {
-    method: 'POST',
-    body: JSON.stringify({
-      token
-    })
+  fetch(`https://76241b3afc1b.ngrok.io/subscribe?token=${token}`, {
+    method: 'GET'
   }).then((response) => {
     if (response.status < 200 || response.status >= 400) {
       throw `Error subscribing to topic: ${response.status} - ${response.text()}`
