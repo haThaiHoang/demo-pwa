@@ -26,7 +26,7 @@ if (!firebase.apps.length) {
 }
 
 function subscribeTokenToTopic(token) {
-  fetch('http://http://192.168.77.36:3000/subscribe', {
+  fetch('http://192.168.77.36:3000/subscribe', {
     method: 'POST',
     body: JSON.stringify({
       token
