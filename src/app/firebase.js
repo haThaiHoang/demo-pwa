@@ -38,7 +38,7 @@ const createNotificationListeners = async () => {
 
     console.log('ready onmessage')
     messaging.onMessage(() => {
-      alert('NEW message')
+      console.log('receive a message')
     })
 
     messaging.onTokenRefresh(async () => {
