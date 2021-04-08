@@ -25,17 +25,17 @@ if (!firebase.apps.length) {
   }
 }
 
-function subscribeTokenToTopic(token, topic) {
-  fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/${topic}`, {
+function subscribeTokenToTopic(token) {
+  fetch('http://http://192.168.77.36:3000/subscribe', {
     method: 'POST',
-    headers: new Headers({
-      'Authorization': 'key=BI6Fsye8MFsWao9fRTI88mJaG4i9RjOtgrmNG6JGn95_fcp8aqa8psNtpIfRzcnWJ6T51B7dyoqoYMp_vyilVjA'
+    body: JSON.stringify({
+      token
     })
   }).then((response) => {
     if (response.status < 200 || response.status >= 400) {
       throw `Error subscribing to topic: ${response.status} - ${response.text()}`
     }
-    console.log(`Subscribed to "${topic}"`)
+    console.log(`Subscribed to topic send all`)
   }).catch((error) => {
     console.error(error)
   })
@@ -51,7 +51,7 @@ const createNotificationListeners = async () => {
     if (fcmToken !== newFcmToken) {
       Storage.set('FCM_TOKEN', newFcmToken)
     }
-    subscribeTokenToTopic(newFcmToken, 'sendAll')
+    subscribeTokenToTopic(newFcmToken)
 
     console.log('ready onmessage')
     messaging.onMessage(() => {
