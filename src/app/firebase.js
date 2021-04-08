@@ -51,7 +51,7 @@ const createNotificationListeners = async () => {
     if (fcmToken !== newFcmToken) {
       Storage.set('FCM_TOKEN', newFcmToken)
     }
-    subscribeTokenToTopic(newFcmToken)
+    subscribeTokenToTopic(newFcmToken, 'sendAll')
 
     console.log('ready onmessage')
     messaging.onMessage(() => {
