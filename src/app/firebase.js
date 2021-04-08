@@ -25,6 +25,22 @@ if (!firebase.apps.length) {
   }
 }
 
+function subscribeTokenToTopic(token, topic) {
+  fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/${topic}`, {
+    method: 'POST',
+    headers: new Headers({
+      'Authorization': 'key=AIzaSyCu290sCD5ZFLPWeMvqMY8w_lOpLYSU8b8'
+    })
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 400) {
+      throw `Error subscribing to topic: ${response.status} - ${response.text()}`
+    }
+    console.log(`Subscribed to "${topic}"`)
+  }).catch((error) => {
+    console.error(error)
+  })
+}
+
 const createNotificationListeners = async () => {
   try {
     await messaging.requestPermission()
@@ -35,6 +51,7 @@ const createNotificationListeners = async () => {
     if (fcmToken !== newFcmToken) {
       Storage.set('FCM_TOKEN', newFcmToken)
     }
+    subscribeTokenToTopic(newFcmToken)
 
     console.log('ready onmessage')
     messaging.onMessage(() => {
